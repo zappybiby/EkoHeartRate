@@ -32,7 +32,6 @@ def process_image_and_calculate_lines(input_image_path):
     # Convert the image back to RGB to draw in color
     image = image.convert("RGB")
     draw = ImageDraw.Draw(image)
-    # Attempt to use a default font, may need adjustment based on your system/environment
     try:
         font = ImageFont.truetype("arial.ttf", 15)
     except IOError:
@@ -45,7 +44,7 @@ def process_image_and_calculate_lines(input_image_path):
             # Draw red line for the detected group
             draw.line((start_x, 0, end_x, image.height), fill="red", width=3)
             # Number the group with a blue label to the right
-            label_position = (end_x + 5, 10)  # Adjust positioning as needed
+            label_position = (end_x + 5, 10)
             draw.text(label_position, str(index + 1), fill="blue", font=font)
 
     output_image_path = input_image_path.replace('.jpg', '_modified.jpg')
@@ -56,7 +55,7 @@ def process_image_and_calculate_lines(input_image_path):
 # Example usage
 if __name__ == "__main__":
     input_image_path = 'example_image.jpg'
-    output_image_path, number_of_groups, estimated_heart_rate = process_image_and_calculate_lines(input_image_path)
+    output_image_path, number_of_beats, estimated_heart_rate = process_image_and_calculate_lines(input_image_path)
     print(f"Modified image saved to: {output_image_path}")
-    print(f"Number of outlier groups: {number_of_groups}")
+    print(f"Number of beats detected: {number_of_beats}")
     print(f"Estimated heart rate: {estimated_heart_rate} beats per minute")
