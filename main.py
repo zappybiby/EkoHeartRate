@@ -27,7 +27,7 @@ def process_image_and_calculate_lines(input_image_path):
     threshold_for_outliers = np.mean(vertical_projection) + 2 * np.std(vertical_projection)
     outlier_columns = [i for i, count in enumerate(vertical_projection) if count > threshold_for_outliers]
 
-    grouped_outliers = group_outlier_columns(outlier_columns, 5)
+    grouped_outliers = group_outlier_columns(outlier_columns, 10)
 
     # Convert the image back to RGB to draw in color
     image = image.convert("RGB")
