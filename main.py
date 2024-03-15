@@ -47,10 +47,12 @@ def process_image_and_calculate_lines(input_image_path):
             label_position = (end_x + 5, 10)
             draw.text(label_position, str(index + 1), fill="blue", font=font)
 
-    output_image_path = input_image_path.replace('.jpg', '_modified.jpg')
-    image.save(output_image_path)
+    # Calculate estimated heart rate based on a 3-second capture window
+    capture_window_seconds = 3
+    beats_to_bpm_factor = 60 / capture_window_seconds
+    estimated_heart_rate = len(grouped_outliers) * beats_to_bpm_factor
 
-    return output_image_path, len(grouped_outliers), len(grouped_outliers) * 20
+    return output_image_path, len(grouped_outliers), estimated_heart_rate
 
 # Example usage
 if __name__ == "__main__":
